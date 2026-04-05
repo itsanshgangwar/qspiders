@@ -1,5 +1,5 @@
 const BASE_URL =
-  `${import.meta.env.VITE_API_BASE_URL}/api` || "http://localhost:9001/api";
+  `${import.meta.env.VITE_API_BASE_URL}/api` || "https://qspiders.onrender.com/api";
 
 export const API_PATHS = {
   AUTH: {
