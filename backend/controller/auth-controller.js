@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const generateToken = (userId) => {
-  let token = jwt.sign({ userId }, "secret", { expiresIn: "1d" });
+  let token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "1d" });
   return token;
 };
 

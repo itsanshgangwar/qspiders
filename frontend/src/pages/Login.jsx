@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { API_PATHS } from "../utils/apiPaths";
+import axios from "../utils/axiosInstance";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -33,6 +34,7 @@ const Login = () => {
         {/* Email */}
         <input
           type="email"
+          name="email"
           placeholder="Enter your email"
           className="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-400"
           onChange={handleForm}
@@ -41,6 +43,7 @@ const Login = () => {
         {/* Password */}
         <input
           type="password"
+          name="password"
           placeholder="Enter your password"
           className="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-400"
           onChange={handleForm}

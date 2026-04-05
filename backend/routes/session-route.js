@@ -4,6 +4,7 @@ import {
   getMySessions,
   getSessionById,
 } from "../controller/session-controller.js";
+import { protect } from "../middlewares/auth-middleware.js";
 
 const router = express.Router();
 

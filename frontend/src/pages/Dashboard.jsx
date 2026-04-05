@@ -22,7 +22,7 @@ const Dashboard = () => {
     if (!role || !experience) return alert("Fill all fields");
 
     try {
-      await axios.post(API_PATHS.SESSION.CREATE, {
+      await axiosInstance.post(API_PATHS.SESSION.CREATE, {
         role,
         experience,
         questions: [],

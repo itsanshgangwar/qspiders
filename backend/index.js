@@ -3,8 +3,14 @@
 import express from "express";
 import cors from "cors"; // cross origin resource sharing (browser blocks the request which comes from anywhere but localhost:8000)
 // 1) we are importing express module which we installed using npm i
+import dotenv from "dotenv";
 
+dotenv.config();
+
+import { connectDB } from "./config/database-config.js";
 import userRoutes from "./routes/auth-route.js";
+import sessionRoutes from "./routes/session-route.js";
+import aiRoutes from "./routes/ai-route.js";
 
 // 2) call/invoke the function
 let app = express(); // object = {listen}
@@ -19,6 +25,11 @@ app.use(express.urlencoded({ extended: true }));// this
 app.use(express.json());
 
 app.use("/api/auth", userRoutes); // http://localhost:9001/api/auth/signup
+app.use("/api/sessions", sessionRoutes);
+app.use("/api/ai", aiRoutes);
+
+// Connect to database
+await connectDB();
 
 // 3) assign a port number to our server
 app.listen(9001, () => {
