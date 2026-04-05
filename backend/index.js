@@ -41,8 +41,9 @@ app.get('*', (req, res) => {
 await connectDB();
 
 // 3) assign a port number to our server
-app.listen(9001, () => {
-  console.log("Server Started.....");
+const PORT = process.env.PORT || 9001;
+app.listen(PORT, () => {
+  console.log(`Server Started on port ${PORT}.....`);
 });
 // app.listen(PORT_NUMBER, callback)
 
