@@ -1,0 +1,11 @@
+{
+  "name": "night-coding-marathon",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build && cp -r dist ../backend/",
+    "start": "cd backend && npm start"
+  },
+  "engines": {
+    "node": "18"
+  }
+}

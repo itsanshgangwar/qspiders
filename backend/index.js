@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors"; // cross origin resource sharing (browser blocks the request which comes from anywhere but localhost:8000)
 // 1) we are importing express module which we installed using npm i
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 
@@ -27,6 +28,14 @@ app.use(express.json());
 app.use("/api/auth", userRoutes); // http://localhost:9001/api/auth/signup
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/ai", aiRoutes);
+
+// Serve static files from the React app build directory
+app.use(express.static(path.join(process.cwd(), 'dist')));
+
+// Catch all handler: send back React's index.html file for any non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
+});
 
 // Connect to database
 await connectDB();
