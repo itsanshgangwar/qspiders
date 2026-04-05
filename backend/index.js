@@ -29,13 +29,7 @@ app.use("/api/auth", userRoutes); // http://localhost:9001/api/auth/signup
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/ai", aiRoutes);
 
-// Serve static files from the React app build directory
-app.use(express.static(path.join(process.cwd(), 'dist')));
-
-// Catch all handler: send back React's index.html file for any non-API routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'));
-});
+// Note: Static files served separately by frontend deployment
 
 // Connect to database
 await connectDB();
