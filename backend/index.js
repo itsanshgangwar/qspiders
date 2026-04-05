@@ -40,11 +40,16 @@ app.get('*', (req, res) => {
 // Connect to database
 await connectDB();
 
-// 3) assign a port number to our server
-const PORT = process.env.PORT || 9001;
-app.listen(PORT, () => {
-  console.log(`Server Started on port ${PORT}.....`);
-});
+// Export the app for Vercel
+export default app;
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 9001;
+  app.listen(PORT, () => {
+    console.log(`Server Started on port ${PORT}.....`);
+  });
+}
 // app.listen(PORT_NUMBER, callback)
 
 //! to check if the server is running, in cmd(git bash), goto backend folder and type "npx nodemon index.js"
