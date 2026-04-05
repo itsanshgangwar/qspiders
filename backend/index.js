@@ -18,7 +18,7 @@ let app = express(); // object = {listen}
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5174",
   }),
 );
 
