@@ -1,0 +1,8 @@
+[
+  {
+    "_id": "ca865154-b8e3-44ca-9add-1efdd6c4322f",
+    "name": "Local User",
+    "email": "localuser@example.com",
+    "password": "$2b$10$7ho3LEU7GYImT/rV3mUo7u6KvmJGBmRK5HHY0pYssLxtLGh7clX3q"
+  }
+]

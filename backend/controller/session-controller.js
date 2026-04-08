@@ -1,11 +1,21 @@
 import Question from "../models/question-model.js";
 import Session from "../models/session-model.js";
+import mongoose from "mongoose";
+
+const isDbConnected = () => mongoose.connection.readyState === 1;
 
 // @desc    Create a new session and linked questions
 // @route   POST /api/sessions/create
 // @access  Private
 export const createSession = async (req, res) => {
   try {
+    if (!isDbConnected()) {
+      return res.status(503).json({
+        success: false,
+        message: "Database unavailable. Please connect MongoDB and try again.",
+      });
+    }
+
     console.log(1);
     const { role, experience, topicsToFocus, description, questions } =
       req.body;
@@ -66,6 +76,14 @@ export const createSession = async (req, res) => {
 // @access  Private
 export const getMySessions = async (req, res) => {
   try {
+    if (!isDbConnected()) {
+      return res.status(200).json({
+        success: true,
+        count: 0,
+        sessions: [],
+      });
+    }
+
     const userId = req.user._id;
 
     const sessions = await Session.find({ user: userId })
@@ -88,6 +106,13 @@ export const getMySessions = async (req, res) => {
 // @access  Private
 export const getSessionById = async (req, res) => {
   try {
+    if (!isDbConnected()) {
+      return res.status(503).json({
+        success: false,
+        message: "Database unavailable. Please connect MongoDB and try again.",
+      });
+    }
+
     const session = await Session.findById(req.params.id)
       .populate("questions")
       .populate("user", "name email");

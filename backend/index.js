@@ -16,9 +16,21 @@ import aiRoutes from "./routes/ai-route.js";
 // 2) call/invoke the function
 let app = express(); // object = {listen}
 
+const allowedOrigins = (
+  process.env.FRONTEND_URL || "http://localhost:5174,http://localhost:5173"
+)
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5174" ,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
   }),
 );
 

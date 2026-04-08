@@ -1,18 +1,21 @@
-const BASE_URL =
-  `${import.meta.env.VITE_API_BASE_URL}/api` || "http://localhost:9001/api" || "https://qspiders-4.onrender.com/api";
+const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:9001";
+
+export const API_BASE_URL = rawBaseUrl.endsWith("/api")
+  ? rawBaseUrl
+  : `${rawBaseUrl.replace(/\/+$/, "")}/api`;
 
 export const API_PATHS = {
   AUTH: {
-    LOGIN: `${BASE_URL}/auth/login`,
-    SIGNUP: `${BASE_URL}/auth/signup`,
+    LOGIN: "/auth/login",
+    SIGNUP: "/auth/signup",
   },
   SESSION: {
-    CREATE: `${BASE_URL}/sessions/create`,
-    GET_ALL: `${BASE_URL}/sessions/my-sessions`,
-    GET_ONE: `${BASE_URL}/sessions`, // usage: GET_ONE/:id
+    CREATE: "/sessions/create",
+    GET_ALL: "/sessions/my-sessions",
+    GET_ONE: "/sessions", // usage: GET_ONE/:id
   },
   AI: {
-    GENERATE_QUESTIONS: `${BASE_URL}/ai/generate-questions`,
-    EXPLAIN: `${BASE_URL}/ai/generate-explanation`,
+    GENERATE_QUESTIONS: "/ai/generate-questions",
+    EXPLAIN: "/ai/generate-explanation",
   },
 };
